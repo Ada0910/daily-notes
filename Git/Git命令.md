@@ -1,36 +1,48 @@
-# 如何在git上创建本地分支
 
-1. 从已有的分支创建新的分支(如从master分支),创建一个ipps1229分支
+# git pull解释
+- git pull命令的作用是
 
-```
-Git checkout -b ipps1229
+取回远程主机某个分支的更新，再与本地的指定分支合并。
 
-
-备注：也可以换成以下两步
-git branch ipps1229
-git checkout ipps1229 
-```
-
-2. 将ipps1229分支推送到远程
+- 一句话总结git pull和git fetch的区别：
 
 ```
-git push origin ipps1229:ipps1229
-
-​ 冒号前面的ipps1229: 推送本地的ipps1229分支到远程origin
-​ 冒号后面的ipps1229: 远程origin没有则会自动创建
+git pull = git fetch + git merge
 ```
 
-3. 建立本地到远程仓库的连接，然后推送代码
+git fetch不会进行合并执行后需要手动执行git merge合并分支，而git pull拉取远程分之后直接与本地分支进行合并。更准确地说，git pull使用给定的参数运行git fetch，并调用git merge将检索到的分支头合并到当前分支中。
+
+
+- 基本用法：
+
 ```
-$ git push --set-upstream origin ipps1229
+git pull <远程主机名> <远程分支名>:<本地分支名>
 ```
 
-4. 取消对 master 分支追踪
+例如执行下面语句：
+
 ```
-$ git branch --unset-upstream master
+git pull origin master:brantest 
+
+将远程主机origin的master分支拉取过来，与本地的brantest分支合并。
 ```
 
-# 附录
+
+后面的冒号可以省略：
+
+```
+git pull origin master
+表示将远程origin主机的master分支拉取过来和本地的当前分支进行合并。
+```
+
+上面的pull操作用fetch表示为：
+
+```
+git fetch origin master:brantest
+git merge brantest
+相比起来git fetch更安全一些，因为在merge前，我们可以查看更新情况，然后再决定是否合
+```
+# Git 命令大全
 - 删除本地分支
 ```
 $ git branch -d dev
@@ -70,3 +82,25 @@ git branch --set-upstream localBranchName origin/branchName
 git config --global user.name "well"
 git config --global user.email "welllife3@163.com"
 ```
+
+
+- 更新远程分支列表
+```
+git remote update origin --prune
+```
+
+- 查看所有分支
+```
+git branch -a
+```
+
+- 删除远程分支Chapater6
+```
+git push origin --delete Chapater6
+```
+
+- 删除本地分支 Chapater6
+```
+git branch -d  Chapater6
+```
+
