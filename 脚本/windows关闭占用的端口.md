@@ -1,5 +1,7 @@
 # windows关闭占用的端口
+
 - 占用查询端口的pid查询
+
 ```
 netstat -ano|findstr "9999"
 ```
